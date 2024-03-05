@@ -1,17 +1,21 @@
-
+// npm i cookie-parser
 
 const express = require('express');
 const app = express();
 
+const cookieParser = require('cookie-parser');
 
+app.use(cookieParser());
 
 app.get('/greet', (req, res) => {
-    res.send('hey ');
+    const { name = 'No=name' } = req.cookies;
+    res.send(`Hey ${name}`);
 })
 
 app.get('/setname', (req, res) => {
     res.cookie('name', 'Suki');
-    res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true })
+    // res.cookie('avatar', 'Kyoshi', { maxAge: 900000, httpOnly: true })
+    res.cookie('avatar','kyoshi')
     res.send('Cookie sent');
 })
 
